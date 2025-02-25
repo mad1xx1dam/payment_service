@@ -1,8 +1,9 @@
 package faang.school.paymentservice.controller;
 
-import faang.school.paymentservice.dto.payment.ExchangeRates;
 import faang.school.paymentservice.dto.payment.Currency;
 import faang.school.paymentservice.dto.payment.ExchangeRateResponse;
+import faang.school.paymentservice.dto.payment.ExchangeRates;
+import faang.school.paymentservice.service.ConverterService;
 import faang.school.paymentservice.service.CurrencyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,22 +18,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class CurrencyController {
     private final CurrencyService currencyService;
+    private final ConverterService converterService;
 
     @GetMapping
     public ResponseEntity<ExchangeRates> getCurrentCurrencyExchangeRate() {
         return ResponseEntity.status(HttpStatus.OK).body(currencyService.getCurrencyRates());
     }
 
-    @GetMapping
+    @GetMapping("/rates")
     public ExchangeRateResponse getRates(@RequestParam(defaultValue = "USD") Currency baseCurrency) {
-        return currencyService.getRates(baseCurrency);
+        return converterService.getRates(baseCurrency);
     }
 
     @GetMapping("/convertor")
     public double convertCurrency(@RequestParam double amount,
                                   @RequestParam Currency baseCurrency,
                                   @RequestParam Currency toCurrency) {
-        return currencyService.convertCurrency(amount, baseCurrency, toCurrency);
+        return converterService.convertCurrency(amount, baseCurrency, toCurrency);
     }
 
 }

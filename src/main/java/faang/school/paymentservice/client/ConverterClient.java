@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(
         name = "currency",
         url = "https://openexchangerates.org/api/latest.json")
-public interface CurrencyClient {
+public interface ConverterClient {
 
     @GetMapping
     ExchangeRateResponse getExchangeRate(@RequestParam String app_id, @RequestParam Currency base);

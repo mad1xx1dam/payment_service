@@ -8,7 +8,6 @@ import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.containers.wait.strategy.Wait;
@@ -38,7 +37,7 @@ public class CurrencyControllerIT {
 
     @Test
     public void testGetRatesSuccessCase() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/v1/currency")
+        mockMvc.perform(MockMvcRequestBuilders.get("/v1/currency/rates")
                         .param("baseCurrency", "USD"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.base").value("USD"));
@@ -46,7 +45,7 @@ public class CurrencyControllerIT {
 
     @Test
     public void testGetRatesMissingCurrencyType() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/v1/currency")
+        mockMvc.perform(MockMvcRequestBuilders.get("/v1/currency/rates")
                         .param("baseCurrency", "WRONG"))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").exists());
@@ -54,7 +53,7 @@ public class CurrencyControllerIT {
 
     @Test
     public void testGetRatesWithDefaultParam() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/v1/currency"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/v1/currency/rates"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.base").value("USD"));
     }
