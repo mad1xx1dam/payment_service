@@ -1,7 +1,7 @@
 server:
   port: 9080
   servlet:
-    context-path: /payment/api/v1
+    context-path: /payment/api
 spring:
   profiles:
     active: local
@@ -51,27 +51,9 @@ resilience4j:
         retryExceptions:
           - feign.FeignException
 
-logging:
-  level:
-    root: info
-
----
-
-spring:
-  config:
-    activate:
-      on-profile: local
-
-logging:
-  level:
-    root: debug
-
----
-
-spring:
-  config:
-    activate:
-      on-profile: prod
+open-exchange-rates:
+  url: https://openexchangerates.org/api/latest.json
+  key: c976ce71ebb74adb83e52ed7245797a8
 
 logging:
   level:

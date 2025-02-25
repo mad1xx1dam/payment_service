@@ -46,6 +46,13 @@ dependencies {
     implementation("io.github.resilience4j:resilience4j-spring-boot3:2.3.0")
 
     /**
+     * Test containers
+     */
+    implementation(platform("org.testcontainers:testcontainers-bom:1.17.6"))
+    testImplementation("org.testcontainers:junit-jupiter")
+    testImplementation("org.testcontainers:postgresql")
+
+    /**
      * Tests
      */
     testImplementation("org.junit.jupiter:junit-jupiter-params:5.9.2")
