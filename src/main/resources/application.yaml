@@ -52,8 +52,10 @@ resilience4j:
           - feign.FeignException
 
 open-exchange-rates:
+  name: converter
   url: https://openexchangerates.org/api/latest.json
   key: c976ce71ebb74adb83e52ed7245797a8
+  service-fee: 0.01
 
 logging:
   level:

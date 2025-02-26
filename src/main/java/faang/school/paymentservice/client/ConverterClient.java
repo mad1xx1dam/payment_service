@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(
-        name = "currency",
-        url = "https://openexchangerates.org/api/latest.json")
+        name = "${open-exchange-rates.name}",
+        url = "${open-exchange-rates.url}")
 public interface ConverterClient {
 
     @GetMapping

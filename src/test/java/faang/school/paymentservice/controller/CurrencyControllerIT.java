@@ -81,8 +81,8 @@ public class CurrencyControllerIT {
     @Test
     public void testConvertCurrencyWithNoAmount() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/v1/currency/convertor")
-                .param("baseCurrency", "WRONG")
-                .param("toCurrency", "WRONG"))
+                        .param("baseCurrency", "WRONG")
+                        .param("toCurrency", "WRONG"))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").exists());
     }
